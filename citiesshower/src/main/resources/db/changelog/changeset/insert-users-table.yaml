@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-user
+      author: Danila
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name:  username
+                  value:  user
+              - column:
+                  name:  password
+                  value:  $2a$12$t8Xcr4EdyplLSqlOLKsz6e2bw6DYxWJ6sX9AEXVWlz0.8l38UDTZS
+              - column:
+                  name:  enabled
+                  value:  true
+            schemaName:  public
+            tableName:  users
+        - insert:
+            columns:
+              - column:
+                  name:  username
+                  value:  admin
+              - column:
+                  name:  password
+                  value:  $2a$12$vRlNBMbedVLCcNcd7/d41eCI4WK5Lc1pu7WCJIuHGGJQ9i/4ZKp2m
+              - column:
+                  name:  enabled
+                  value:  true
+            schemaName:  public
+            tableName:  users
+        - insert:
+            columns:
+              - column:
+                  name:  username
+                  value:  user
+              - column:
+                  name:  authority
+                  value:  ALLOW_READ
+            schemaName:  public
+            tableName:  authorities
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: authority
+                  value: ALLOW_READ
+            schemaName: public
+            tableName: authorities
+        - insert:
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: authority
+                  value: ALLOW_EDIT
+            schemaName: public
+            tableName: authorities

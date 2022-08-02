@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db_cities:
+    container_name: db_cities
+    ports:
+      - "8082:5432"
+    environment:
+      - POSTGRES_PASSWORD=1p3p5p7p
+      - POSTGRES_USER=admin
+    image: postgres:14.4-alpine
+  app_cities:
+    container_name: app_cities
+    restart: on-failure
+    build:
+      context: ./citiesshower
+      dockerfile: Dockerfile
+    image: cities-shower:1
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_cities:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=1p3p5p7p
+      - SPRING_LIQUIBASE_CHANGE_LOG=classpath:db/changelog/db.changelog-master.yml
+      - SPRING_PROFILES_ACTIVE=dev
+    ports:
+      - "8083:8080"
+    links:
+      - db_cities
+    depends_on:
+      - db_cities
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  cities-client:
+    build:
+      context: ./client-cities
+      dockerfile: Dockerfile
+    command: npm run start
+    image: cities-client:1
+    container_name: cl_cities
+    ports:
+      - "3000:3000"
+    links:
+      - app_cities
+    depends_on:
+      - app_cities
+    volumes:
+      - ./:/cl_cities
+      - /cl_cities/node_modules
+    environment:
+      - API_BASE_URL=app_cities:8083/

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <title>cities-list-page</title>
+</head>
+<body style="background-color:bisque">
+<div class="container"></div>
+<h1 class="mb-3" style="color:fuchsia;text-align:center">Cities shower</h1>
+<div id="cities">
+    <div style="height:100%;display:flex;align-items:center;justify-content:center;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Find city&nbsp;&nbsp;&nbsp;
+        <label for="searchTxt" title="FindCity">
+            <input name="searchTxt" type="text" maxlength="512" id="searchTxt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </label>
+        <button type="button" class="btn btn-primary" id="authorise" style="float:right;
+        border:none;color:red;padding: 15px 32px;text-align:center;background-color:lightpink;
+        text-decoration:none;display:inline-block;font-size:16px">Logout</button>
+    </div>
+    <br/>
+    <div style="height:100%;display:flex;align-items:center;justify-content:center;">
+        <table id="table-of-cities" style="border:3px solid coral"></table>
+    </div>
+    <div style="height:100%;display:flex;align-items:center;justify-content:center;">
+        <button type="button" class="btn btn-primary" id="previous" style="
+    border:none;color:green;padding: 15px 32px;text-align:center;
+    text-decoration:none;display:inline-block;font-size:16px">
+            Previous
+        </button>
+        <button type="button" class="btn btn-primary" id="next" style="
+    border:none;color:green;padding: 15px 32px;text-align:center;
+    text-decoration:none;display:inline-block;font-size:16px">Next
+        </button>
+    </div>
+</div>
+</body>
+<script src="app.js"></script>
+</html>
