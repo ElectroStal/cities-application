@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -34,25 +34,30 @@ public class ShowPageOfCitiesService {
                     .orElseThrow(() -> new CitiesException("Incorrect request"));
             Page<City> page = citiesRepository.findAll(PageRequest.of(businessEntity.getCurrentPage(),
                     businessEntity.getPageSize()));
-            result = createMessage(page);
+            result = createMessage(page, message.getMessageId());
             log.info("Database called successfully for request with messageId = {}, response = {}", message.getMessageId(), page.getContent());
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (CitiesException e) {
             result = errorHandler.createErrorMessage(1, e.getErrorMessage(), result);
         }catch (Exception e) {
+            log.error("Error during executing message with messageId {}", message.getMessageId(), e);
             result = errorHandler.createErrorMessage(1, "Internal error", result);
         }
         return result;
     }
 
-    private Message createMessage(Page<City> page) {
-        List<City> cities = page.getContent();
-        Message responseMessage = new Message();
-        BusinessEntity businessEntity = new BusinessEntity();
-        businessEntity.setHasNextPage(page.hasNext());
-        businessEntity.setHasPreviousPage(page.hasPrevious());
-        businessEntity.getEntities().addAll(cities);
-        responseMessage.setBusinessEntity(businessEntity);
-        return responseMessage;
+    private Message createMessage(Page<City> page, String messageId) {
+        BusinessEntity businessEntity = BusinessEntity
+                .builder()
+                .hasNextPage(page.hasNext())
+                .hasPreviousPage(page.hasPrevious())
+                .entities(new ArrayList<>())
+                .build();
+        businessEntity.getEntities().addAll(page.getContent());
+        return Message
+                .builder()
+                .messageId(messageId)
+                .businessEntity(businessEntity)
+                .build();
     }
 }

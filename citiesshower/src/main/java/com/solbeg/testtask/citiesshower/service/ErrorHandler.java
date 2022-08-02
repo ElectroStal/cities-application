@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 public class ErrorHandler {
 
     public Message createErrorMessage(int errorCode, String errorMessage, Message message) {
-        TechEntity techEntity = new TechEntity();
-        techEntity.setErrorCode(errorCode);
-        techEntity.setErrorMessage(errorMessage);
-        message.setTechEntity(techEntity);
+        message.setTechEntity(TechEntity
+                .builder()
+                .errorCode(errorCode)
+                .errorMessage(errorMessage)
+                .build());
         return message;
     }
 }

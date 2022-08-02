@@ -1,5 +1,6 @@
 package com.solbeg.testtask.citiesshower.security;
 
+import com.solbeg.testtask.citiesshower.properties.SecurityProperties;
 import com.solbeg.testtask.citiesshower.util.UserRolesEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,12 @@ import java.util.List;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final SecurityProperties securityProperties;
+
+    public SpringSecurityConfig(SecurityProperties securityProperties) {
+        this.securityProperties = securityProperties;
+    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -31,7 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasAuthority(UserRolesEnum.ADMIN.getRole())
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("http://localhost:3000", true)
+                .defaultSuccessUrl(securityProperties.getSuccessLoginUrl(), true)
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")

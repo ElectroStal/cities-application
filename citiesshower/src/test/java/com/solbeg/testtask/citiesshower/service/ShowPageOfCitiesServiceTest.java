@@ -6,10 +6,7 @@ import com.solbeg.testtask.citiesshower.model.Message;
 import com.solbeg.testtask.citiesshower.repository.CitiesRepository;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 

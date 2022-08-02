@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -35,19 +36,24 @@ public class FindCityByNameService {
             log.info("Prepare to call database for operation findCity for message with messageId = {}, requestParameter = {}", message.getMessageId(), cityName);
             City city = citiesRepository.findByName(cityName);
             log.info("Database called successfully for request with messageId = {}, response = {}", message.getMessageId(), city);
-            result = createMessage(city);
+            result = createMessage(city, message.getMessageId());
             result = errorHandler.createErrorMessage(0, null, result);
         } catch (Exception e) {
+            log.error("Error during executing message with messageId {}", message.getMessageId(), e);
             result = errorHandler.createErrorMessage(1, "Internal error", result);
         }
         return result;
     }
 
-    private Message createMessage(City city) {
-        Message responseMessage = new Message();
-        BusinessEntity businessEntity = new BusinessEntity();
+    private Message createMessage(City city, String messageId) {
+        BusinessEntity businessEntity = BusinessEntity
+                .builder()
+                .entities(new ArrayList<>())
+                .build();
         businessEntity.getEntities().add(city);
-        responseMessage.setBusinessEntity(businessEntity);
-        return responseMessage;
+        return Message.builder()
+                .messageId(messageId)
+                .businessEntity(businessEntity)
+                .build();
     }
 }

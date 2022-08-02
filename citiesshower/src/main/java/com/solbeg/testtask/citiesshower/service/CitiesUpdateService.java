@@ -37,6 +37,7 @@ public class CitiesUpdateService {
             log.info("Database called successfully for request with messageId = {}", message.getMessageId());
             result = errorHandler.createErrorMessage(0, null, message);
         } catch (Exception e) {
+            log.error("Error during executing message with messageId {}", message.getMessageId(), e);
             result = errorHandler.createErrorMessage(1, "Internal error", result);
         }
         return result;

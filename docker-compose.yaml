@@ -9,11 +9,6 @@ services:
       - POSTGRES_PASSWORD=1p3p5p7p
       - POSTGRES_USER=admin
     image: postgres:14.4-alpine
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8082" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
   app_cities:
     container_name: app_cities
     restart: on-failure
@@ -33,6 +28,11 @@ services:
       - db_cities
     depends_on:
       - db_cities
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8082" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
   cities-client:
     build:
       context: ./client-cities

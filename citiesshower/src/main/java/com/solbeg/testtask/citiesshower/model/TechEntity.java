@@ -1,14 +1,12 @@
 package com.solbeg.testtask.citiesshower.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class TechEntity {
     private int errorCode;
     private String errorMessage;
