@@ -1,18 +1,5 @@
 {
-  "techEntity": {
-    "errorCode": 0,
-    "errorMessage": null
-  },
-  "businessEntity": {
-    "currentPage": 10,
-    "pageSize": 10,
-    "amountOfEntities": 1,
-    "entities": [
-      {
-        "id": 1,
-        "name": "Tbilisi",
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/2014_Tbilisi%2C_Widoki_z_Twierdzy_Narikala_%2836%29.jpg/500px-2014_Tbilisi%2C_Widoki_z_Twierdzy_Narikala_%2836%29.jpg"
-      }
-    ]
-  }
+  "oldName": "Tokyo",
+  "name": "Batumi",
+  "photo": "ref"
 }

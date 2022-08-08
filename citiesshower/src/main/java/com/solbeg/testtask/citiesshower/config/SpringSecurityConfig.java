@@ -1,8 +1,8 @@
-package com.solbeg.testtask.citiesshower.security;
+package com.solbeg.testtask.citiesshower.config;
 
-import com.solbeg.testtask.citiesshower.properties.SecurityProperties;
-import com.solbeg.testtask.citiesshower.util.UserRolesEnum;
+import com.solbeg.testtask.citiesshower.entity.UserRolesEnum;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,11 +20,7 @@ import java.util.List;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final SecurityProperties securityProperties;
-
-    public SpringSecurityConfig(SecurityProperties securityProperties) {
-        this.securityProperties = securityProperties;
-    }
+    private static final String SUCCESS_LOGIN_URL = "http://localhost:3000";
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -32,13 +28,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/")
                 .authenticated()
-                .antMatchers("/pageRequest", "/cityFind")
+                .antMatchers(HttpMethod.GET, "/api/**")
                 .hasAuthority(UserRolesEnum.USER.getRole())
-                .antMatchers("/cityUpdate")
+                .antMatchers(HttpMethod.PUT, "/api/**")
                 .hasAuthority(UserRolesEnum.ADMIN.getRole())
                 .and()
                 .formLogin()
-                .defaultSuccessUrl(securityProperties.getSuccessLoginUrl(), true)
+                .defaultSuccessUrl(SUCCESS_LOGIN_URL, true)
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
@@ -70,4 +66,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
+
+
 }

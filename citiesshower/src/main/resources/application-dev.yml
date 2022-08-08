@@ -7,6 +7,3 @@ spring:
 
   liquibase:
     change-log: db/changelog/db.changelog-master.yml
-
-security:
-  successLoginUrl: http://localhost:3000
