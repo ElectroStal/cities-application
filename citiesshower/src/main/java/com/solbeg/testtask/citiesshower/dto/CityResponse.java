@@ -15,6 +15,7 @@ public class CityResponse {
     private boolean hasPreviousPage;
     private String name;
     private String photo;
+    private String uuid;
     List<CityResponse> citiesList;
 
 }

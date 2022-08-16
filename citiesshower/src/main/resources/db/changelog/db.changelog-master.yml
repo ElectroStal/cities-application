@@ -5,9 +5,9 @@ databaseChangeLog:
 
   - include:
       file: db/changelog/changeset/create-city-table.yaml
-  - include:
-      file: db/changelog/changeset/insert-city-values.yaml
+#  - include:
+#      file: db/changelog/changeset/insert-city-values.yaml
   - include:
       file: db/changelog/changeset/create-users-table.yaml
-  - include:
-      file: db/changelog/changeset/insert-users-table.yaml
+#  - include:
+#      file: db/changelog/changeset/insert-users-table.yaml

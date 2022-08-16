@@ -10,8 +10,8 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @Data
 public class CityRequest {
-    @NotBlank(message = "City old name should not be null or blank")
-    private String oldName;
+    @NotBlank(message = "City uuid should not be null or blank")
+    private String uuid;
     @NotBlank(message = "City name should not be null or blank")
     private String name;
     @NotBlank(message = "City photo should not be null or blank")

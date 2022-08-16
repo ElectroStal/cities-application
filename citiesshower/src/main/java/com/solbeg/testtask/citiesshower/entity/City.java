@@ -1,19 +1,20 @@
 package com.solbeg.testtask.citiesshower.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @ToString
-public class City {
+public class City extends BaseEntity {
 
-    @Id
+    @Column
     private int id;
 
     @Column

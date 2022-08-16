@@ -37,11 +37,12 @@ async function clearPage() {
 }
 
 
-function citiesHtml(id, name, photo) {
+function citiesHtml(uuid, id, name, photo) {
     const citiesList = document.getElementById('table-of-cities');
     citiesList.insertAdjacentHTML('beforeend', `
             <table style="border:3px solid coral">
                 <tr id="city-table">
+                    <td id="u_uid">${uuid}</td>
                     <td style="text-align:center;width:20px;border:3px solid coral">${id}</td>
                     <td id="curName" style="text-align:center;width:100px;border:3px solid coral">${name}</td>
                     <td style="text-align:center;width:100px;border:3px solid coral"><img id="curPhoto" src="${photo}" alt="Wrong reference to photo" height="300" width="500"></td>
@@ -76,7 +77,7 @@ async function showResult() {
             console.log(hasPreviousPage);
             let i = 1;
             t["citiesList"].forEach(x => {
-                citiesHtml((currentPage + 1) * pageSize + i++, x.name, x.photo)
+                citiesHtml(x.uuid,(currentPage + 1) * pageSize + i++, x.name, x.photo)
             })
         })
     console.log(res);
@@ -105,7 +106,7 @@ async function findCityForEdit(name) {
         mode: 'cors',
         redirect: 'follow',
     })).json()
-        .then(t => {citiesHtml(1, t["name"], t["photo"]);
+        .then(t => {citiesHtml(t["uuid"],1, t["name"], t["photo"]);
         })
     const citiesList = document.getElementById('table-of-cities');
     citiesList.insertAdjacentHTML('beforeend', `
@@ -122,7 +123,7 @@ async function findCityForEdit(name) {
 
 async function goUpdateCity() {
     await updateCity(
-        document.getElementById("curName").textContent,
+        document.getElementById("u_uid").textContent,
         document.getElementById("newName").value == null || document.getElementById("newName").value.length === 0
             ? document.getElementById("curName").textContent : document.getElementById("newName").value,
         document.getElementById("newPhoto").value == null || document.getElementById("newPhoto").value.length === 0
@@ -142,13 +143,13 @@ async function findCity(name) {
         mode: 'cors',
         redirect: 'follow',
     })).json()
-        .then(t => {citiesHtml(1, t["name"], t["photo"]);
+        .then(t => {citiesHtml(t["uuid"],1, t["name"], t["photo"]);
         })
     console.log(hasPreviousPage);
     console.log(res);
 }
 
-async function updateCity(oldName, name, photo) {
+async function updateCity(uuid, name, photo) {
     await clearPage();
     const res = (await fetch('http://localhost:8083/api/city', {
         method: 'PUT',
@@ -159,7 +160,7 @@ async function updateCity(oldName, name, photo) {
         },
         mode: 'cors',
         redirect: 'follow',
-        body: `{"oldName": "${oldName}", "name": "${name}", "photo": "${photo}"}`
+        body: `{"uuid": "${uuid}", "name": "${name}", "photo": "${photo}"}`
     }))
     let status = res.status;
     if (status !== 200) {
@@ -168,7 +169,7 @@ async function updateCity(oldName, name, photo) {
         return;
     }
     const result = res.json()
-        .then(t => {citiesHtml(1, t["name"], t["photo"]);
+        .then(t => {citiesHtml(t["uuid"],1, t["name"], t["photo"]);
         })
     console.log(res);
 }

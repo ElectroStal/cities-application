@@ -3,7 +3,10 @@ package com.solbeg.testtask.citiesshower.repository;
 import com.solbeg.testtask.citiesshower.entity.City;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CityRepository extends PagingAndSortingRepository<City, Long> {
+import java.util.Optional;
+import java.util.UUID;
 
-    City findByName(String name);
+public interface CityRepository extends PagingAndSortingRepository<City, UUID> {
+
+    Optional<City> findByName(final String name);
 }

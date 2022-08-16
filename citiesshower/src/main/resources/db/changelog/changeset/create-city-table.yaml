@@ -7,10 +7,24 @@ databaseChangeLog:
             tableName: city
             columns:
               - column:
+                  name: uuid
+                  type: uuid
+                  defaultValueComputed: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: create_time
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: update_time
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
                   name: id
                   type: bigint
                   constraints:
-                    primaryKey: true
                     nullable: false
               - column:
                   name: name
@@ -20,3 +34,28 @@ databaseChangeLog:
               - column:
                   name: photo
                   type: varchar(1024)
+
+        - loadData:
+            catalogName: citiesshower
+            columns:
+              - column:
+                  header: id
+                  name: id
+                  type: NUMERIC
+              - column:
+                  header: name
+                  name: name
+                  type: STRING
+              - column:
+                  header: photo
+                  name: photo
+                  type: STRING
+#            commentLineStartsWith: //
+            encoding: UTF-8
+            file: db/changelog/csv/cities.csv
+            quotchar: ''''
+#            relativeToChangelogFile: true
+            schemaName: public
+            separator: ','
+            tableName: city
+            usePreparedStatements: true

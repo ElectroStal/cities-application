@@ -14,19 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class FindCityByNameService {
 
     private final CityRepository cityRepository;
+    private final CityMapper cityMapper;
 
-    public FindCityByNameService(CityRepository cityRepository) {
+    public FindCityByNameService(CityRepository cityRepository, CityMapper cityMapper) {
         this.cityRepository = cityRepository;
+        this.cityMapper = cityMapper;
     }
 
     @Transactional(readOnly = true)
     public CityResponse findCityByName(String cityName) {
         log.info("Prepare to call database for operation findCity for message with requestParameter = {}", cityName);
-        City city = cityRepository.findByName(cityName);
-        if (city == null) {
-            throw new NoSuchResourceException(cityName);
-        }
+        City city = getCityByNameOrThrowException(cityName);
         log.info("Database called successfully for request with response = {}", city);
-        return CityMapper.INSTANCE.cityToCityResponse(city);
+        return cityMapper.cityToCityResponse(city);
+    }
+
+    private City getCityByNameOrThrowException(String name) {
+        return cityRepository.findByName(name)
+                .orElseThrow(() -> new NoSuchResourceException(name));
     }
 }

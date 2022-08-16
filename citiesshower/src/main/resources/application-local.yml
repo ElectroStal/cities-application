@@ -8,5 +8,8 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yml
 
+page:
+  size: 10
+
 server:
   port: 8083
