@@ -42,7 +42,7 @@ function citiesHtml(uuid, id, name, photo) {
     citiesList.insertAdjacentHTML('beforeend', `
             <table style="border:3px solid coral">
                 <tr id="city-table">
-                    <td id="u_uid">${uuid}</td>
+                    <td id="u_uid" hidden>${uuid}</td>
                     <td style="text-align:center;width:20px;border:3px solid coral">${id}</td>
                     <td id="curName" style="text-align:center;width:100px;border:3px solid coral">${name}</td>
                     <td style="text-align:center;width:100px;border:3px solid coral"><img id="curPhoto" src="${photo}" alt="Wrong reference to photo" height="300" width="500"></td>
