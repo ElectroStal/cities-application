@@ -1,0 +1,26 @@
+.number_in_list {
+    text-align:center;
+    width:20px;
+    border:3px solid coral
+}
+
+.cur_name {
+    text-align:center;
+    width:100px;
+    border:3px solid coral
+}
+
+.cur_photo {
+    text-align:center;
+    width:500px;
+    border:3px solid coral
+}
+
+.button_edit {
+    background-color:red;
+    color:bisque
+}
+
+.city_table {
+    border:3px solid coral
+}

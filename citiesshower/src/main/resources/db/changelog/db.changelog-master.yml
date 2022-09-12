@@ -4,6 +4,6 @@ databaseChangeLog:
       username:  liquibase
 
   - include:
-      file: db/changelog/changeset/create-city-table.yaml
+      file: db/changelog/changeset/create-city-table.yml
   - include:
-      file: db/changelog/changeset/create-users-table.yaml
+      file: db/changelog/changeset/create-users-table.yml

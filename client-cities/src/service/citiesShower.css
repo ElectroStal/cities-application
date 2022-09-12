@@ -1,0 +1,51 @@
+.button_authorise {
+    float:right;
+    border:none;
+    color:red;
+    padding: 15px 32px;
+    text-align:center;
+    background-color:lightpink;
+    text-decoration:none;
+    display:inline-block;
+    font-size:16px
+}
+
+.div_table_of_cities {
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+.table_of_cities {
+    border:3px solid coral
+}
+
+.btn_change_page {
+    border:none;
+    color:green;
+    padding: 15px 32px;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+    font-size:16px
+}
+
+.div_buttons {
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+
+.h_name {
+    color:fuchsia;
+    text-align:center
+}
+
+.div_find {
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
