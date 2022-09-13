@@ -3,10 +3,10 @@ import './service/citiesShower'
 import React from 'react';
 import ShowCities from "./service/citiesShower";
 
-const App = (props) => {
+const App = () => {
     return (
         <div>
-            <ShowCities props={props}/>
+            <ShowCities/>
         </div>
     )
 }

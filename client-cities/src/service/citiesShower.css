@@ -2,12 +2,13 @@
     float:right;
     border:none;
     color:red;
-    padding: 15px 32px;
+    padding: 10px 24px;
     text-align:center;
     background-color:lightpink;
     text-decoration:none;
     display:inline-block;
-    font-size:16px
+    font-size:16px;
+    margin-left: 10px
 }
 
 .div_table_of_cities {
@@ -48,4 +49,20 @@
     display:flex;
     align-items:center;
     justify-content:center
+}
+
+.label_search {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+    width: 230px;
+    line-height: 26px;
+    margin-bottom: 5px;
+}
+
+.input_search {
+    height: 20px;
+    flex: 0 0 210px;
+    margin-left: 10px;
 }
